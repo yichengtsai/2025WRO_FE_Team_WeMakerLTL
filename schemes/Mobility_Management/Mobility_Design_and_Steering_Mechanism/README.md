@@ -2,10 +2,18 @@
 
 ### Ackermann Steering Mechanism (阿克曼轉向機構介紹)
 
-- 設計目的：
-  - 提高車輛轉彎時的穩定性與效率
-  - 模擬真實車輛轉向行為，減少輪胎打滑與磨損
-- 運作原理：
-  - 轉彎時，內側與外側前輪需要不同的轉向角度
-  - 阿克曼轉向透過連桿機構，使前輪指向同一圓心
-  - 確保各輪在轉彎時沿自身的圓弧軌跡行駛，降低橫向力
+本設計採用了**阿克曼轉向機構（Ackermann Steering Mechanism）**作為前輪轉向方案。該機構透過幾何設計，使車輛在轉彎時前輪能指向同一圓心，內外輪轉向角度不同，符合理想轉彎軌跡。這種設計常見於真實汽車中，能有效提升轉彎穩定性與轉向效率。本車輛的阿克曼機構由光固化3D列印製作，搭配伺服馬達驅動，實現準確且穩定的轉向控制。
+- 優點
+  - 減少輪胎在轉彎時的滑移與磨損
+  - 提高轉彎的穩定性與效率
+  - 模擬真實車輛的轉向行為，提升真實感與控制精度
+  - 可與伺服馬達整合，實現精準轉角控制
+
+<div align="center">
+<img width="300" height="200"  src="https://github.com/yichengtsai/future_enguneers/blob/main/schemes/Mobility_Management/Mobility_Design_and_Steering_Mechanism/photo/Ackerman_steering.png">
+</div>
+<div align="center">阿克曼轉向機構</div>
+
+### 伺服機構
+
+- 
