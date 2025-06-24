@@ -10,7 +10,7 @@
   - 可與伺服馬達整合，實現精準轉角控制
 
 <div align="center">
-<img width="300" height="200"  src="https://github.com/yichengtsai/future_enguneers/blob/main/schemes/Mobility_Management/Mobility_Design_and_Steering_Mechanism/photo/Ackerman_steering.png">
+<img width="300"  src="../Mobility_Design_and_Steering_Mechanism/photo/Ackerman_steering.png">
 </div>
 <div align="center">阿克曼轉向機構</div>
 
