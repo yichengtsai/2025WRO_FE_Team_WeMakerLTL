@@ -18,10 +18,10 @@
     </tr>
     <tr>
       <td>
-        <img width="300" src="../../img/circuit_board_front.png" alt="18650充電電池">
+        <img width="300" src="../../img/.png" alt="18650充電電池">
       </td>
       <td>
-        <img width="320" src="../../img/circuit_board_back.png" alt="LiPo 3S 11.1V 鋰聚合物電池">
+        <img width="320" src="../../img/.png" alt="LiPo 3S 11.1V 鋰聚合物電池">
       </td>
     </tr>
   </table>

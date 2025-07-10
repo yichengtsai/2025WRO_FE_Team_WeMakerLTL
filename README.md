@@ -7,11 +7,11 @@
 
 ## <div align="center">Content 目錄</div> 
   ### 1. Mobility Management(移動性管理)
-   - [Mobility Design and Steering Mechanism（移動設計與轉向機構）](https://github.com/yichengtsai/future_enguneers/blob/main/schemes/Mobility_Management/Mobility_Design_and_Steering_Mechanism.md)
-   - [Chassis Fabrication and Material Selection（底盤製作與材料選擇）](https://github.com/yichengtsai/future_enguneers/blob/main/schemes/Mobility_Management/Chassis_Fabrication_and_Material_Selection.md)
+   - [Mobility Design and Steering Mechanism（移動設計與轉向機構）](schemes/Mobility_Management/Mobility_Design_and_Steering_Mechanism.md)
+   - [Chassis Fabrication and Material Selection（底盤製作與材料選擇）](schemes/Mobility_Management/Chassis_Fabrication_and_Material_Selection.md)
   
   ### 2. Power and Sensor Management(電源和感測器管理)
-  - [Power System Design（電源系統設計）](https://github.com/yichengtsai/future_enguneers/blob/main/schemes/Power_and_Sensor_Management\Power_System_Design)
+  - [Power System Design（電源系統設計）](schemes/Power_and_Sensor_Management\READEME.md)
   - [Sensor Selection and Integration（感測器選擇與整合）]
   - [Wiring and Documentation（接線與文件規劃）]
 

@@ -6,6 +6,23 @@
     - 質地輕盈易於加工
     - 表面平整適合雷射雕刻精細作業
 
+<div style="text-align: center;">
+  <table>
+    <tr>
+      <th style="text-align: center;">雷切機機台</th>
+      <th style="text-align: center;">3mm 椴木板</th>
+    </tr>
+    <tr>
+      <td>
+        <img width="300" src="../../img/.png" alt="雷切機機台">
+      </td>
+      <td>
+        <img width="320" src="../../img/.png" alt="3mm 椴木板">
+      </td>
+    </tr>
+  </table>
+</div>
+
 - ### 轉向機構材料選擇
 我們採用光固化技術製作轉向機構。光固化是一種透過特定波長的光（通常為紫外光 UV）觸發光敏樹脂聚合反應，將液態樹脂快速轉化為固體的加工技術，具備高精度與快速成型的優勢，非常適合用於製作細節複雜且結構精細的機械零件。
 
@@ -13,6 +30,23 @@
     - 高精度成型可達到 0.05mm 甚至更細的細節，適合製作複雜結構與精密零件
     - 成品表面細緻，後處理相對簡單，適合直接使用
     - 可一體列印成型，減少零件數量與組裝誤差
+
+<div style="text-align: center;">
+  <table>
+    <tr>
+      <th style="text-align: center;">光固化機台</th>
+      <th style="text-align: center;">光固化成品</th>
+    </tr>
+    <tr>
+      <td>
+        <img width="300" src="../../img/.png" alt="光固化機台">
+      </td>
+      <td>
+        <img width="320" src="../../img/.png" alt="光固化成品">
+      </td>
+    </tr>
+  </table>
+</div>
 
 
 

@@ -1,0 +1,6 @@
+- [Raspberry Pi 4 Model B - 8GB RAM](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
+- [JGA25-370 DC 12V 620RPM Gearbox Motor](https://www.amazon.com/JGA25-370-Electric-Torque-1360RPM-620rpm/dp/B0DJXMDH4Y?th=1)
+- [MG90S Micro Servo Motor](https://www.taiwaniot.com.tw/product/mg90s-14g%E5%85%A8%E9%87%91%E5%B1%AC%E9%BD%92%E8%88%B5%E6%A9%9F-servo-%E4%BC%BA%E6%9C%8D%E6%A9%9F/)
+- [L293D Quad Half-H Driver IC](https://makerselectronics.com/product/l293d-quadruple-half-h-driver-dip-16?srsltid=AfmBOor8x6YpBt5xD3M4oFWECU7LvvDw8eQ7Qa9RUXldlsAVvPvdkIHF)
+- [SONY IMX477](https://www.taiwaniot.com.tw/product/sony-imx477-%E6%94%9D%E5%BD%B1%E9%8F%A1%E9%A0%AD%E6%A8%A1%E7%B5%84-1230%E8%90%AC%E5%83%8F%E7%B4%A0-160%E5%BB%A3%E8%A7%92-%E6%94%AF%E6%8F%B4%E6%A8%B9%E8%8E%93%E6%B4%BE%E3%80%81jetson-nano/)
+- [Desire Power V8 11.1V 1300mAh 35C-70C 3S 鋰聚合物電池](https://shopee.tw/-%E6%90%9E%E5%95%A5%E9%A3%9B%E6%A9%9F-Desire-Power-V8-11.1V-1300mAh-35C-70C-3S%E9%8B%B0%E9%9B%BB%E6%B1%A0LiPo-BSMI%E8%AA%8D%E8%AD%89-i.17393576.2036942264)
