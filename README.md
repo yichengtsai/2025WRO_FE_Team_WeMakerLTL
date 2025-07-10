@@ -11,7 +11,7 @@
    - [Chassis Fabrication and Material Selection（底盤製作與材料選擇）](schemes/Mobility_Management/Chassis_Fabrication_and_Material_Selection.md)
   
   ### 2. Power and Sensor Management(電源和感測器管理)
-  - [Power System Design（電源系統設計）](schemes/Power_and_Sensor_Management\READEME.md)
+  - [Power System Design（電源系統設計）](schemes/Power_and_Sensor_Management/READEME.md)
   - [Sensor Selection and Integration（感測器選擇與整合）]
   - [Wiring and Documentation（接線與文件規劃）]
 
