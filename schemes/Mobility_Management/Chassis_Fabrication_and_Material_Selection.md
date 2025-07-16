@@ -42,7 +42,7 @@
         <img width="300" src="../../img/.png" alt="光固化機台">
       </td>
       <td>
-        <img width="320" src="../../img/.png" alt="光固化成品">
+        <img width="320" src="../../img/3d_Printer.png" alt="光固化成品">
       </td>
     </tr>
   </table>
