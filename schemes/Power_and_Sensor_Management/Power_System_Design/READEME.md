@@ -1,7 +1,7 @@
 ## <div align="center">電源系統設計</div> 
 - 電源系統概要圖
 <div style="text-align: center;">
-    <img src="../../img/Power_supply_system_of_Summary_diagram.png" alt="電路板上視圖">
+    <img src="../../../img/Power_supply_system_diagram.png" alt="電源供應系統">
 </div>
 
 - 電池
@@ -18,10 +18,10 @@
     </tr>
     <tr>
       <td>
-        <img width="300" src="../../img/.png" alt="18650充電電池">
+        <img width="300" src="../../../img/18650.png" alt="18650充電電池">
       </td>
       <td>
-        <img width="320" src="../../img/.png" alt="LiPo 3S 11.1V 鋰聚合物電池">
+        <img width="320" src="../../../img/LiPo_3S_11.1V.png" alt="LiPo 3S 11.1V 鋰聚合物電池">
       </td>
     </tr>
   </table>
