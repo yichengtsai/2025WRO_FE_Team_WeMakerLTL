@@ -39,7 +39,7 @@
     </tr>
     <tr>
       <td>
-        <img width="300" src="../../img/.png" alt="光固化機台">
+        <img width="300" src="../../img/Light_curing.png" alt="光固化機台">
       </td>
       <td>
         <img width="320" src="../../img/3d_Printer.png" alt="光固化成品">

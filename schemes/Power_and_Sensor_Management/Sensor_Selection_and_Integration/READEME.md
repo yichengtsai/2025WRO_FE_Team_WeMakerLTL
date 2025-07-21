@@ -13,7 +13,7 @@
 - 相容樹莓派與其他開發平台
 
 <div align="center">
-<img width="120" height="120" src="../../img/Sony_IMX477.png">
+<img width="150" height="120" src="../../../img/Sony_IMX477.png">
 </div>
 
 ## <div align="center">處理器</div>
@@ -30,7 +30,7 @@
 - 儲存：microSD 卡插槽（作業系統與資料儲存）
 - GPIO：40-pin GPIO 排針，相容於先前版本
 <div align="center">
-<img width="120" height="120" src="../../img/Raspberry_Pi.png">
+<img width="300" height="200" src="../../../img/Raspberry_pi.png">
 </div>
 
 ## <div align="center">光學雷達</div>
@@ -46,7 +46,7 @@
 - 通訊介面：USB / UART / CAN（依版本而異）
 - 應用範圍：機器人導航、地圖建構、自主避障、室內定位、SLAM
 <div align="center">
-<img width="120" height="120" src="../../img/D100_LiDAR.png">
+<img width="200" height="200" src="../../../img/D100.png">
 </div>
 
 ## <div align="center">降壓板</div> 
@@ -64,7 +64,7 @@
 - 具備：過溫保護、輸出短路保護、反接保護（部分版本）
 - 控制方式：可調電壓與電流（雙電位器設計）
 <div align="center">
-<img width="120" height="120" src="../../img/BNO_055_IMU.png">
+<img width="250" height="330" src="../../../img/5A_Buck_Converter.png">
 </div>
 
 ## <div align="center">陀螺儀</div> 
@@ -83,7 +83,7 @@
     * 陀螺儀：±125 / ±250 / ±500 / ±1000 / ±2000 dps
     * 磁力計：±1300 µT（x, y 軸），±2500 µT（z 軸）
 <div align="center">
-<img width="120" height="120" src="../../img/BNO_055_IMU.png">
+<img width="160" height="120" src="../../../img/BNO055.png">
 </div>
 
 ## <div align="center">顏色感測器</div> 
@@ -100,24 +100,23 @@
 - 模組常附白光 LED，可提升低光環境的辨識能力
 - 工作電壓：3.3V 或 5V（視模組而定）
 <div align="center">
-<img width="120" height="120" src="../../img/L293D.png">
+<img width="120" height="120" src="../../../img/TCS34725.png">
 </div>
 
 ## <div align="center">馬達控制晶片</div> 
-### L293D
-- L293D 是一款經典且廣泛使用的雙 H 橋馬達驅動晶片，可同時控制兩顆直流馬達的正反轉，或一個步進馬達的四相驅動。它可接受 TTL 邏輯訊號（如 Arduino、Raspberry Pi 輸出）作為控制輸入，並提供與控制邏輯隔離的馬達供電路徑，讓微控制器可以輕鬆控制較高電壓或電流的負載。
+### L298N
+- L298N 是一款常見的雙H橋馬達驅動模組，主要用於控制直流馬達與步進馬達的正反轉與速度調節。它基於 ST 公司推出的 L298N 晶片，可同時驅動兩個直流馬達，或一個雙極性步進馬達。
 
-    內部設計具備高電壓容忍度與過熱保護，是入門與教育領域常見的馬達控制方案。
+    模組可接受 5V 到 35V 的馬達電源輸入，並能提供最高約 2A 的輸出電流。透過 IN1~IN4 控制端搭配 PWM 訊號輸入，可靈活地控制馬達的啟動、停止、轉向與速度。
+    常見應用包括：機器人底盤、小型自走車、自動門控制等。
 
 #### 主要特色：
-- 雙通道 H 橋驅動，可驅動 2 個直流馬達或 1 個步進馬達
-- 工作電壓：4.5V ~ 36V（馬達電源）
-- 邏輯電壓：5V TTL 相容
-- 單通道最大輸出電流：600mA（峰值可達 1.2A）
-- 內建二極體保護（反向電壓保護）
-- 封裝形式：16-pin DIP 或 SOP，方便電路板焊接與實驗室應用
+- 雙H橋設計，可獨立控制兩顆馬達
+- 支援 PWM 調速
+- 內建散熱片與5V 穩壓輸出（可選擇是否啟用）
+- 適用於 Arduino、Raspberry Pi 等開發板
 <div align="center">
-<img width="120" height="120" src="../../img/L293D.png">
+<img width="200" height="200" src="../../../img/L298N.png">
 </div>
 
 ## <div align="center">伺服馬達</div> 
@@ -135,7 +134,7 @@
 - 重量：約 13.4g
 - 接頭：3-pin（PWM 訊號、VCC、GND）
 <div align="center">
-<img width="120" height="120" src="../../img/MG90S.png">
+<img width="120" height="120" src="../../../img/MG90.png">
 </div>
 
 ## <div align="center">直流減速馬達</div> 
@@ -154,7 +153,7 @@
 - 編碼器：霍爾編碼器，雙通道輸出（A/B 相），一般為 11脈衝/圈（經減速後脈衝數提升）
 - 編碼器輸出：TTL 輸出，可用中斷方式讀取
 <div align="center">
-<img width="120" height="120" src="../../img/JGA25_370.png">
+<img width="200" height="200" src="../../../img/DC_Motor.png">
 </div>
 
 
