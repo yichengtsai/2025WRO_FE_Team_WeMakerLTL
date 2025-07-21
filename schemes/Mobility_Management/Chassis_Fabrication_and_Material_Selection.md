@@ -17,7 +17,7 @@
         <img width="300" src="../../img/.png" alt="雷切機機台">
       </td>
       <td>
-        <img width="320" src="../../img/.png" alt="3mm 椴木板">
+        <img width="200" src="../../img/board.png" alt="3mm 椴木板">
       </td>
     </tr>
   </table>
