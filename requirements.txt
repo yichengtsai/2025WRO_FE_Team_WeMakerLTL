@@ -1,0 +1,5 @@
+numpy==1.24.3
+opencv-python==4.8.0.76
+pyyaml==6.0.1
+smbus2==0.4.2
+pyserial==3.5
