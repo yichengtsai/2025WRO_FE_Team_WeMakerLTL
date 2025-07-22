@@ -5,15 +5,188 @@
 ## 底盤
 
 ### 驅動系統
+#### 後輪直流馬達
+
+在後輪驅動部分使用一顆620RPM 的直流馬達（DC Motor）作為動力來源。直流馬達具有轉速穩定、控制方式簡單的特性。本系統透過金屬齒輪組將馬達輸出連接至變速器，以調整扭力與轉速的傳遞效率，使車輛具備良好的啟動能力與穩定的行進速度。金屬齒輪具有良好的強度與耐磨性，可提升整體傳動系統的壽命與可靠度。
+
+- 優點
+  - 控制簡單，可透過 PWM 輕鬆調整速度
+  - 可提供穩定扭力，適合驅動車輪
+  - 搭配金屬齒輪與變速機構，提升扭力輸出並延長使用壽命
+  - 兼具穩定推進與反應速度
+
+<div align="center">
+<img width="140" height="150" src="../img/DC_motor.png">
+</div>
 
 ### 轉向系統
+#### Ackermann Steering Mechanism (阿克曼轉向機構介紹)
+
+本設計採用了 **阿克曼轉向機構（Ackermann Steering Mechanism）** 作為前輪轉向方案。該機構透過幾何設計，使車輛在轉彎時前輪能指向同一圓心，內外輪轉向角度不同，符合理想轉彎軌跡。這種設計常見於真實汽車中，能有效提升轉彎穩定性與轉向效率。本車輛的阿克曼機構由光固化3D列印製作，搭配伺服馬達驅動，實現準確且穩定的轉向控制。
+- 優點
+  - 減少輪胎在轉彎時的滑移與磨損
+  - 提高轉彎的穩定性與效率
+  - 模擬真實車輛的轉向行為，提升真實感與控制精度
+  - 可與伺服馬達整合，實現精準轉角控制
+
+<div align="center">
+<img width="300" src="../img/Ackerman_steering.png">
+</div>
+<div align="center">阿克曼轉向機構</div>
 
 # 電源管理與感測
 
 ## 電源(電池、降壓、每個模組供電方式)
 
 ## 感測器
-控制器...(RPi4)
+### 控制器
+#### Raspbrry pi 4(8GB)
+- 處理器 (CPU)
+    - Broadcom BCM2711
+    - 四核心 ARM Cortex-A72 (ARM v8) 64-bit 處理器
+    - 時脈：1.5GHz
+- 記憶體 (RAM)
+    - 8GB LPDDR4 SDRAM
+    - 記憶體與 SoC 整合在一個封裝上
+- 圖形處理器 (GPU)
+    - Broadcom VideoCore VI
+    - 支援 OpenGL ES 3.0
+- 輸出入埠 (I/O Ports)
+    - 2 × USB 3.0
+    - 2 × USB 2.0
+    - 1 × Gigabit Ethernet (RJ45)
+    - 40-pin GPIO header
+    - CSI 相機介面
+    - DSI 顯示介面
+<div align="center">
+<img width="300" height="200" src="../img/Raspberry_pi.png">
+</div>
+
+### 攝影鏡頭
+#### Sony IMX477
+- 感測器類型：CMOS（背照式，BSI）
+- 解析度：12.3 Megapixels
+- 感測器尺寸：1/2.3 英吋
+- 像素大小：1.55μm × 1.55μm
+- 有效畫素：4056 × 3040
+- 輸出格式：
+    - RAW Bayer（10-bit / 12-bit）
+    - 支援 MIPI CSI-2 數位輸出
+<div align="center">
+<img width="150" height="120" src="../img/Sony_IMX477.png">
+</div>
+
+### 顏色感測器
+#### TCS34725
+- 感測元件類型RGB + Clear 光感測器
+- 通訊介面I²C（最大 400 kHz）
+- ADC 解析度16 位元（4 通道同步）
+- 光感通道R（紅）、G（綠）、B（藍）、C（清光）
+- 增益設定1x、4x、16x、60x
+- 整合時間2.4 ms ~ 700 ms（可程式化）
+- 紅外線濾光片內建，可提升色彩準確度
+- 工作電壓2.7V ~ 3.6V（模組通常支援 3.3V / 5V）
+- 輸出資料格式每通道 16 位元數值（R、G、B、C）
+<div align="center">
+<img width="120" height="120" src="../img/TCS34725.png">
+</div>
+
+### 光學雷達
+#### LDROBOT D100 LiDAR
+- 測距原理	Triangulation（CCD 三角測量）
+- 掃描範圍	360° 全方位旋轉
+- 測距範圍	0.15 ～ 8 公尺
+- 角度解析度	約 1°
+- 資料輸出頻率	約 2300 點/秒
+- 掃描頻率	6 Hz（固定）
+- 測距精度	±3 cm（典型值）
+- 通訊介面	UART（3.3V TTL）
+- 供電電壓	DC 5V（USB 或 UART）
+<div align="center">
+<img width="300" height="300" src="../img/D100.png">
+</div>
+
+### 降壓板
+#### High Current 5A Constant Voltage Constant Current Buck Power Supply Module
+- 輸入電壓	DC 4V ～ 38V（推薦 5V～36V）
+- 輸出電壓	DC 1.25V ～ 36V（可調）
+- 輸出電流	最大 5A（建議持續 4.5A 以下）
+- 輸出功率	最大 75W（需加散熱片）
+- 轉換效率	高達 96%（視輸入/輸出電壓與電流）
+- 恆壓/恆流控制	可透過兩顆可調電位器分別設定輸出電壓與限流值
+- 開關頻率	約 180kHz（視版本與晶片而定）
+- 保護功能	輸出短路保護、過溫保護、過電流保護
+<div align="center">
+<img width="250" height="300" src="../img/5A_Buck_Converter.png">
+</div>
+
+### 陀螺儀
+#### BNO055 IMU
+- 感測器內容	三軸加速度計 + 三軸陀螺儀 + 三軸磁力計 + 32-bit Cortex-M0F FUSION MCU
+- 輸出數據	Quaternion（四元數）、Euler 角（Yaw, Pitch, Roll）、加速度、角速度、磁場、線性加速度、重力向量等
+- 加速度範圍	±2g / ±4g / ±8g / ±16g
+- 陀螺儀範圍	±125 / ±250 / ±500 / ±1000 / ±2000 dps
+- 磁力計範圍	±1300 μT（X/Y 軸）、±2500 μT（Z 軸）
+- 取樣率（輸出率）	最多 100 Hz（視模式）
+- 絕對方向誤差	約 ±2.5°（典型值）
+- 電壓需求	3.0V ~ 3.6V（模組常含穩壓可支援 3.3V / 5V）
+- 通訊介面	I²C（100kHz～400kHz）與 UART（最大460800 bps）
+- 內建演算法	Bosch Sensor Fusion Algorithm（可直接輸出姿態角）
+<div align="center">
+<img width="160" height="120" src="../img/BNO055.png">
+</div>
+
+### 馬達控制板
+#### L298N
+- IC 型號	L298N 雙 H 橋馬達驅動 IC
+- 驅動電壓	5V ~ 35V（邏輯電壓 5V）
+- 邏輯電壓	5V（模組可內建穩壓器）
+- 最大輸出電流	2A / 每通道（瞬間最大可達 3A）
+- 驅動通道數	2 通道（可驅動兩個直流馬達或一個雙極步進馬達）
+- 控制方式	數位訊號控制（IN1 ~ IN4）、PWM 調速
+- 支援功能	正轉、反轉、剎車、停止、PWM 調速
+- 功耗	依負載與驅動電壓而異
+- 模組接腳說明：
+    - 接腳	功能
+    - IN1 / IN2	控制馬達A方向
+    - IN3 / IN4	控制馬達B方向
+    - ENA / ENB	啟用並調速（通常接 PWM）
+    - OUT1 / OUT2	馬達A輸出
+    - OUT3 / OUT4	馬達B輸出
+    - VCC	馬達電源（5V ~ 35V）
+    - GND	接地
+    - 5V	模組內部邏輯電壓輸出/輸入（若使用板上穩壓器，插跳線帽以供應5V）
+<div align="center">
+<img width="200" height="200" src="../img/L298N.png">
+</div>
+
+### 伺服馬達
+#### MG90S
+- 工作電壓	4.8 V ～ 6.0 V
+- 扭力	約 1.8 kg·cm（4.8 V）
+約 2.2 kg·cm（6.0 V）
+- 速度	約 0.1 秒 / 60°（4.8 V）
+- 工作電流	空載約 100 mA，負載時更高
+- 控制方式	PWM 控制，頻率約 50 Hz
+- 齒輪材質	金屬齒輪（鋼齒）
+- 軸承類型	雙軸承設計，提高穩定性
+- 角度範圍	約 180°
+<div align="center">
+<img width="120" height="120" src="../img/MG90.png">
+</div>
+
+### 直流減速馬達
+#### JGA25-370
+- 工作電壓	3 V ～ 12 V（常用 6 V / 12 V）
+- 空載轉速	約 370 RPM（12 V 時）
+- 空載電流	約 90 mA ～ 120 mA
+- 額定負載電流	約 300 mA ～ 500 mA
+- 額定轉速	約 200 ～ 300 RPM（依負載與電壓而異）
+- 扭力	約 1.5 ～ 3 kg·cm（依減速比不同）
+- 減速比	常見有 1:48、1:64、1:100 等版本
+<div align="center">
+<img width="200" height="200" src="../img/DC_Motor.png">
+</div>
 感應器規格...
 自製上板(上面的電路板)
 
