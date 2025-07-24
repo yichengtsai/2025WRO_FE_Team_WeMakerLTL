@@ -213,7 +213,7 @@
 <img width="auto" height="300" src="../img/Open_Challenge_Flowchart.png">
 </div>
 
-### 光達置中校正運算（Pseudocode）
+### 光達置中校正運算
 
 #### 補償原理:
 
