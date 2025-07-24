@@ -185,7 +185,7 @@
 - 扭力	約 1.5 ～ 3 kg·cm（依減速比不同）
 - 減速比	常見有 1:48、1:64、1:100 等版本
 <div align="center">
-<img width="200" height="200" src="../img/DC_Motor.png">
+<img height="200" src="../img/DC_Motor.png">
 </div>
 感應器規格...
 自製上板(上面的電路板)
@@ -210,7 +210,7 @@
 校正完成後進入下一段直行流程，如此循環構成完整繞圈動作。
 
 <div align="center">
-<img width="auto" height="200" src="../img/Open_Challenge_Flowchart.png">
+<img width="auto" height="300" src="../img/Open_Challenge_Flowchart.png">
 </div>
 
 ### 光達置中校正運算（Pseudocode）
