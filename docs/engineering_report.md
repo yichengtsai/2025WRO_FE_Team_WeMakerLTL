@@ -195,7 +195,7 @@
 ## 資格賽
 
 ### 功能概述
-我們透過整合陀螺儀與光達感測器，實現車子在限定空間內的繞圈移動行為。整體動作流程分為以下步驟：
+我們透過整合陀螺儀與光達，實現車子在限定空間內的繞圈移動行為。整體動作流程分為以下步驟：
 
 一、初始化階段
 啟動系統後，進行感測器初始化與通訊設定，同步讀取陀螺儀、光達與光感的資料，並透過光達資料進行初始位置的置中校正。
@@ -208,6 +208,10 @@
 
 四、重複流程
 校正完成後進入下一段直行流程，如此循環構成完整繞圈動作。
+
+<div align="center">
+<img width="auto" height="200" src="../img/Open_Challenge_Flowchart.png">
+</div>
 
 ### 光達置中校正運算（Pseudocode）
 
@@ -238,8 +242,52 @@ else if gyro < 0:
 ```
 
 ## 障礙挑戰賽
-* 影像辨識
-* 停車
+
+### 顏色遮罩設定與輪廓擷取
+
+為了辨識場地中的紅色與綠色積木，程式採用了 HSV 色彩空間來進行顏色篩選。與 RGB 不同，HSV 更適合處理顏色辨識的問題，因為它將顏色（Hue）、飽和度（Saturation）與明亮度（Value）分離，能更穩定地適應不同光照條件。
+
+使用 ``` cv2.inRange ``` 函式可以將在範圍內的像素轉為白色（255），不在範圍內的轉為黑色（0），形成二值遮罩。再透過 cv2.findContours 找出輪廓，即可擷取紅綠積木在影像中的位置。這些輪廓後續會用來判斷積木位置與大小，進一步進行避障判斷與行為控制。
+
+根據設定好的色彩範圍，對畫面進行遮罩，找出特定顏色積木的區域
+```
+green_mask = cv2.inRange(hsv, green_lower, green_upper)
+contours, _ = cv2.findContours(green_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+```
+
+### 計算閃避積木的角度
+
+在辨識出紅色或綠色積木並取得其座標後，系統接著根據積木與畫面中心的相對位置，動態計算車子應該偏轉的角度以進行閃避。這段運算考量了以下幾個因素：
+
+- 水平偏移量（offset）：透過積木中心與畫面中心的 X 軸差距，換算出一個比例值 offset_ratio，代表積木偏離中心的程度。
+
+- 閃避補償角度（extra_angle）：當積木靠近畫面下半部，會根據當前陀螺儀角度（gyro）增加一個額外的閃避角度，使機器人能提早偏轉方向，避免碰撞。
+
+- 總角度合成：將偏移比例轉換為角度，加上補償角，並透過 constrain 限制結果在合理範圍內，確保伺服馬達不會轉動過頭。
+
+座標正規化與偏移量計算
+```
+frame_width = frame.shape[1]
+frame_height = frame.shape[0]
+norm_y = block_center_y / frame_height
+norm_x = block_center_x / frame_height
+frame_center_x = frame_width // 2
+offset_ratio = (frame_center_x - block_center_x) / (frame_width // 2)
+```
+根據條件增加額外偏轉角度
+```
+if norm_y > 0.5 and norm_x < 0.8 and abs(gyro) > 30:
+    extra_angle = 25
+elif norm_y > 0.5 and norm_x < 0.8:
+    extra_angle = 10
+else:
+    extra_angle = 0
+```
+最終角度計算與限制
+```
+total_angle = (52 * (offset_ratio + 0.8) / 1.6) + extra_angle
+final_angle = constrain(total_angle, 0, 50)
+```
 
 # 團隊營運
 
@@ -248,7 +296,7 @@ else if gyro < 0:
 | ------ | ------- | ------------------------------------------- |
 | 蔡宜成 | 軟體程式設計  | 撰寫 Raspberry Pi 控制程式，包括感測器資料讀取、影像處理、路徑規劃邏輯。 |
 | 林仲斌 | 撰寫Github與硬體電路與整合 | 設計並焊接電路板（含感測器與電源模組接線），負責供電穩定與模組連裝。             |
-| 張小美 | 撰寫Github與機構設計與製作 | 使用 Onshape 設計底盤與夾爪零件，負責3D列印與組接。          |
+| 賴孟承 | 撰寫Github與機構設計與製作 | 使用 Onshape 設計底盤與夾爪零件，負責3D列印與組接。          |
 ## 
 
 # 未來發展
