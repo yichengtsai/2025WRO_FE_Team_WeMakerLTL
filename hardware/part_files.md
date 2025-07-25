@@ -2,7 +2,7 @@
 
 ## Chassis (Laser cutting)
 
-You can use laser cutting mechine make these part
+您可根據下列 DXF 檔案進行雷射切割，以製作本設計所需的底盤與結構件。
 
 * [Bottom](../hardware/DXF/Plate.DXF)
 <img src="../img/PartDiagram-Chassis_1.png">
@@ -14,6 +14,7 @@ You can use laser cutting mechine make these part
 <img src="../img/PartDiagram-Chassis_3.png">
 
 ## Bracket (3D Printing)
+透過下列提供的檔案，您可使用光固化 3D 列印方式製作零件，組裝出與本機構相同的結構。
 
 * [Bearing Bracket](../hardware/STL/Bearing%20Holder_1.STL)
 <img src="../img/PartDiagram-Bearing Bracket.jpg">
