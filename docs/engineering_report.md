@@ -5,6 +5,31 @@
 ## 底盤
 
 ### 驅動系統
+
+### 馬達控制板
+#### L298N
+- IC 型號	L298N 雙 H 橋馬達驅動 IC
+- 驅動電壓	5V ~ 35V（邏輯電壓 5V）
+- 邏輯電壓	5V（模組可內建穩壓器）
+- 最大輸出電流	2A / 每通道（瞬間最大可達 3A）
+- 驅動通道數	2 通道（可驅動兩個直流馬達或一個雙極步進馬達）
+- 控制方式	數位訊號控制（IN1 ~ IN4）、PWM 調速
+- 支援功能	正轉、反轉、剎車、停止、PWM 調速
+- 功耗	依負載與驅動電壓而異
+- 模組接腳說明：
+    - 接腳	功能
+    - IN1 / IN2	控制馬達A方向
+    - IN3 / IN4	控制馬達B方向
+    - ENA / ENB	啟用並調速（通常接 PWM）
+    - OUT1 / OUT2	馬達A輸出
+    - OUT3 / OUT4	馬達B輸出
+    - VCC	馬達電源（5V ~ 35V）
+    - GND	接地
+    - 5V	模組內部邏輯電壓輸出/輸入（若使用板上穩壓器，插跳線帽以供應5V）
+<div align="center">
+<img width="200" height="200" src="../img/L298N.png">
+</div>
+
 #### 後輪直流馬達
 
 在後輪驅動部分使用一顆620RPM 的直流馬達（DC Motor）作為動力來源。直流馬達具有轉速穩定、控制方式簡單的特性。本系統透過金屬齒輪組將馬達輸出連接至變速器，以調整扭力與轉速的傳遞效率，使車輛具備良好的啟動能力與穩定的行進速度。金屬齒輪具有良好的強度與耐磨性，可提升整體傳動系統的壽命與可靠度。
@@ -18,6 +43,27 @@
 <div align="center">
 <img width="140" height="150" src="../img/DC_motor.png">
 </div>
+
+#### 變速機構
+
+我們考慮使用差速器結構作為後輪驅動的變速機構之一。差速器是一種可以同時傳遞動力與允許左右車輪轉速不同的機構，常用於汽車後輪驅動系統中。當車輛直線行駛時，兩側輪子等速旋轉；當轉彎時，內外側輪子轉速不同，差速器內部的行星齒輪則會自動補償兩側轉速差，維持動力平衡並減少輪胎摩擦。
+
+圖 1（左圖）| 展示車輛直行時的差速器狀態，左右輪轉速一致，綠色中間齒輪不轉。
+
+圖 2（右圖）| 展示車輛轉彎時的狀態，一側輪子轉速下降，差速器內部齒輪開始旋轉來補償另一側輪子的加速。
+
+<p align="center">
+  <img src="../img/transmission_1.png" width="150" alt="圖1"/>
+  <img src="../img/transmission_2.png" width="150" alt="圖2"/>
+</p>
+<p align="center"><b>圖 1（左）：直行狀態  圖 2（右）：轉彎補償</b></p>
+
+
+
+<div align="center">
+<img width="100" height="100" src="../img/transmission.png">
+</div>
+<div align="center">樂高變速器</div>
 
 ### 轉向系統
 #### Ackermann Steering Mechanism (阿克曼轉向機構介紹)
@@ -34,12 +80,67 @@
 </div>
 <div align="center">阿克曼轉向機構</div>
 
+### 伺服馬達
+#### MG90S
+- 工作電壓	4.8 V ～ 6.0 V
+- 扭力	約 1.8 kg·cm（4.8 V）
+約 2.2 kg·cm（6.0 V）
+- 速度	約 0.1 秒 / 60°（4.8 V）
+- 工作電流	空載約 100 mA，負載時更高
+- 控制方式	PWM 控制，頻率約 50 Hz
+- 齒輪材質	金屬齒輪（鋼齒）
+- 軸承類型	雙軸承設計，提高穩定性
+- 角度範圍	約 180°
+<div align="center">
+<img width="120" height="120" src="../img/MG90.png">
+</div>
+
 # 電源管理與感測
 
 ## 電源(電池、降壓、每個模組供電方式)
 
-## 感測器
-### 控制器
+### 電源系統概要圖
+<div style="text-align: center;">
+    <img src="../img/Power_supply_system_diagram.png" alt="電源供應系統">
+</div>
+
+### 電池
+原先我們採用 18650 鋰電池 作為電源供應，但由於樹莓派運作時需要穩定的 5V 電壓，而單顆 18650 電池的電壓範圍介於 4.2V 至 3.0V，即使透過升壓模組轉換，當電量下降過快時仍容易導致 電壓不穩，進而產生 系統重啟、螢幕閃爍，甚至在寫入過程中造成 SD 卡損壞 等問題。
+
+為了解決上述問題，我們改採 LiPo 3S 11.1V 鋰聚合物電池 作為主要電源。雖然需要額外配置降壓模組來將電壓轉為穩定的 5V，但相較於單顆 18650 電池，其具有 更高的輸入電壓裕度與更穩定的電流輸出，能有效改善電壓不穩所帶來的風險，並提升系統運行的可靠性與安全性。
+
+<div style="text-align: center;">
+  <table>
+    <tr>
+      <th style="text-align: center;">18650充電電池</th>
+      <th style="text-align: center;">LiPo 3S 11.1V 鋰聚合物電池</th>
+    </tr>
+    <tr>
+      <td>
+        <img width="300" src="../img/18650.png" alt="18650充電電池">
+      </td>
+      <td>
+        <img width="320" src="../img/LiPo_3S_11.1V.png" alt="LiPo 3S 11.1V 鋰聚合物電池">
+      </td>
+    </tr>
+  </table>
+</div>
+
+### 降壓板
+#### High Current 5A Constant Voltage Constant Current Buck Power Supply Module
+- 輸入電壓	DC 4V ～ 38V（推薦 5V～36V）
+- 輸出電壓	DC 1.25V ～ 36V（可調）
+- 輸出電流	最大 5A（建議持續 4.5A 以下）
+- 輸出功率	最大 75W（需加散熱片）
+- 轉換效率	高達 96%（視輸入/輸出電壓與電流）
+- 恆壓/恆流控制	可透過兩顆可調電位器分別設定輸出電壓與限流值
+- 開關頻率	約 180kHz（視版本與晶片而定）
+- 保護功能	輸出短路保護、過溫保護、過電流保護
+<div align="center">
+<img width="250" height="300" src="../img/5A_Buck_Converter.png">
+</div>
+
+## 控制器
 #### Raspbrry pi 4(8GB)
 - 處理器 (CPU)
     - Broadcom BCM2711
@@ -62,6 +163,7 @@
 <img width="300" height="200" src="../img/Raspberry_pi.png">
 </div>
 
+## 感測器
 ### 攝影鏡頭
 #### Sony IMX477
 - 感測器類型：CMOS（背照式，BSI）
@@ -106,19 +208,7 @@
 <img width="300" height="300" src="../img/D100.png">
 </div>
 
-### 降壓板
-#### High Current 5A Constant Voltage Constant Current Buck Power Supply Module
-- 輸入電壓	DC 4V ～ 38V（推薦 5V～36V）
-- 輸出電壓	DC 1.25V ～ 36V（可調）
-- 輸出電流	最大 5A（建議持續 4.5A 以下）
-- 輸出功率	最大 75W（需加散熱片）
-- 轉換效率	高達 96%（視輸入/輸出電壓與電流）
-- 恆壓/恆流控制	可透過兩顆可調電位器分別設定輸出電壓與限流值
-- 開關頻率	約 180kHz（視版本與晶片而定）
-- 保護功能	輸出短路保護、過溫保護、過電流保護
-<div align="center">
-<img width="250" height="300" src="../img/5A_Buck_Converter.png">
-</div>
+
 
 ### 陀螺儀
 #### BNO055 IMU
@@ -136,59 +226,9 @@
 <img width="160" height="120" src="../img/BNO055.png">
 </div>
 
-### 馬達控制板
-#### L298N
-- IC 型號	L298N 雙 H 橋馬達驅動 IC
-- 驅動電壓	5V ~ 35V（邏輯電壓 5V）
-- 邏輯電壓	5V（模組可內建穩壓器）
-- 最大輸出電流	2A / 每通道（瞬間最大可達 3A）
-- 驅動通道數	2 通道（可驅動兩個直流馬達或一個雙極步進馬達）
-- 控制方式	數位訊號控制（IN1 ~ IN4）、PWM 調速
-- 支援功能	正轉、反轉、剎車、停止、PWM 調速
-- 功耗	依負載與驅動電壓而異
-- 模組接腳說明：
-    - 接腳	功能
-    - IN1 / IN2	控制馬達A方向
-    - IN3 / IN4	控制馬達B方向
-    - ENA / ENB	啟用並調速（通常接 PWM）
-    - OUT1 / OUT2	馬達A輸出
-    - OUT3 / OUT4	馬達B輸出
-    - VCC	馬達電源（5V ~ 35V）
-    - GND	接地
-    - 5V	模組內部邏輯電壓輸出/輸入（若使用板上穩壓器，插跳線帽以供應5V）
-<div align="center">
-<img width="200" height="200" src="../img/L298N.png">
-</div>
 
-### 伺服馬達
-#### MG90S
-- 工作電壓	4.8 V ～ 6.0 V
-- 扭力	約 1.8 kg·cm（4.8 V）
-約 2.2 kg·cm（6.0 V）
-- 速度	約 0.1 秒 / 60°（4.8 V）
-- 工作電流	空載約 100 mA，負載時更高
-- 控制方式	PWM 控制，頻率約 50 Hz
-- 齒輪材質	金屬齒輪（鋼齒）
-- 軸承類型	雙軸承設計，提高穩定性
-- 角度範圍	約 180°
-<div align="center">
-<img width="120" height="120" src="../img/MG90.png">
-</div>
 
-### 直流減速馬達
-#### JGA25-370
-- 工作電壓	3 V ～ 12 V（常用 6 V / 12 V）
-- 空載轉速	約 370 RPM（12 V 時）
-- 空載電流	約 90 mA ～ 120 mA
-- 額定負載電流	約 300 mA ～ 500 mA
-- 額定轉速	約 200 ～ 300 RPM（依負載與電壓而異）
-- 扭力	約 1.5 ～ 3 kg·cm（依減速比不同）
-- 減速比	常見有 1:48、1:64、1:100 等版本
-<div align="center">
-<img height="200" src="../img/DC_Motor.png">
-</div>
-感應器規格...
-自製上板(上面的電路板)
+
 
 # 障礙管理
 
