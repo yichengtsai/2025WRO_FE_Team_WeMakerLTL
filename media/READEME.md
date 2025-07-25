@@ -9,9 +9,9 @@
         <th>LEFT</th>
     </tr>
     <tr>
-        <th><img src="../img/Car.png"></th>
-        <th><img src="../img/Car.png"></th>
-        <th><img src="../img/Car.png"></th>
+        <th><img src="../img/Car-Top.png"></th>
+        <th><img src="../img/Car-Front.png"></th>
+        <th><img src="../img/Car-Left.png"></th>
     </tr>
     <tr>
         <th>BOTTOM</th>
@@ -19,15 +19,37 @@
         <th>RIGHT</th>
     </tr>
     <tr>
-        <th><img src="../img/Car.png"></th>
-        <th><img src="../img/Car.png"></th>
-        <th><img src="../img/Car.png"></th>
+        <th><img src="../img/Car-Bottom.png"></th>
+        <th><img src="../img/Car-Rear.png"></th>
+        <th><img src="../img/Car-Right.png"></th>
     </tr>
 </table>
 
 ## Team Photos
 
-<img src="../img/S__133390338.jpg">
+### Our Team
+
+<table>
+    <tr>
+        <th><img src="../img/TeamPhoto.jpg"></th>
+        <th><img src="../img/TeamPhoto-Funny.jpg"></th>
+    </tr>
+</table>
+
+### Member
+
+<table>
+    <tr>
+        <th>蔡宜成 Tim</th>
+        <th>林仲斌 Leo</th>
+        <th>賴孟承 Lai</th>
+    </tr>
+    <tr>
+        <th><img src="../img/Tim.jpg"></th>
+        <th><img src="../img/Leo.jpg"></th>
+        <th><img src="../img/Lai.jpg"></th>
+    </tr>
+</table>
 
 ## Demonstration Videos
 
