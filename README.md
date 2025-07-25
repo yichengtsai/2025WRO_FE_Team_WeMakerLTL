@@ -14,10 +14,10 @@
 1. 移動性管理: [/docs/engineering_report.md](docs/engineering_report.md#移動性管理)
 2. 電源和感測器:[/docs/engineering_report.md](docs/engineering_report.md#電源管理與感測)
 3. 障礙物管理:[/docs/engineering_report.md](docs/engineering_report.md#障礙管理)
-4. 圖片-團隊和汽車: [media/README.md](media/README.md)
-5. 完整的影片: [media/README.md#demonstration-videos](media/README.md#demonstration-videos)
-6. 使用GitHub:
-7. 工程因素/技術條件:
+4. 圖片-團隊和汽車: [/media/README.md](media/README.md)
+5. 完整的影片: [/media/README.md#demonstration-videos](media/README.md#demonstration-videos)
+6. 使用GitHub: [/README.md](README.md)
+7. 工程因素/技術條件: [/hardware/part_files](/hardware/part_files.md)
 8. 評審總體印象: [/README.md/快速開始](README.md#快速開始)
 
 ## 快速開始
