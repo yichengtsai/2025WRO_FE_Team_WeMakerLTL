@@ -53,6 +53,6 @@
 
 ## Demonstration Videos
 
-* [`Open Challenge Video Link`](www.youtube.com)
+* [`Open Challenge Video Link`](https://www.youtube.com/watch?v=9j58IBostGY)
 
-* [`Obstacle Challenge Video Link`](www.youtube.com)
+* [`Obstacle Challenge Video Link`](https://www.youtube.com/watch?v=XK0Uejr6utQ)
