@@ -291,38 +291,72 @@ green_mask = cv2.inRange(hsv, green_lower, green_upper)
 contours, _ = cv2.findContours(green_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 ```
 
-### 計算閃避積木的角度
+### 物件偵測及位置取得
 
-在辨識出紅色或綠色積木並取得其座標後，系統接著根據積木與畫面中心的相對位置，動態計算車子應該偏轉的角度以進行閃避。這段運算考量了以下幾個因素：
-
-- 水平偏移量（offset）：透過積木中心與畫面中心的 X 軸差距，換算出一個比例值 offset_ratio，代表積木偏離中心的程度。
-
-- 閃避補償角度（extra_angle）：當積木靠近畫面下半部，會根據當前陀螺儀角度（gyro）增加一個額外的閃避角度，使機器人能提早偏轉方向，避免碰撞。
-
-- 總角度合成：將偏移比例轉換為角度，加上補償角，並透過 constrain 限制結果在合理範圍內，確保伺服馬達不會轉動過頭。
-
-座標正規化與偏移量計算
+系統透過影像處理（OpenCV）對畫面中的紅色牆或積木進行輪廓偵測。
+為了後續避障，需要獲取該物件的矩形邊界座標 (x, y, w, h) 及其底部 y 座標 y_bottom，並找出距離車輛最近的目標。
 ```
-frame_width = frame.shape[1]
-frame_height = frame.shape[0]
-norm_y = block_center_y / frame_height
-norm_x = block_center_x / frame_height
-frame_center_x = frame_width // 2
-offset_ratio = (frame_center_x - block_center_x) / (frame_width // 2)
+for cnt in red_contours:
+    area = cv2.contourArea(cnt)
+    if area > 50:
+        x, y, w, h = cv2.boundingRect(cnt)
+        cv2.rectangle(imageFrame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+         y_bottom = y + h
+        if y_bottom > max_y_bottom_red:
+            max_y_bottom_red = y_bottom
+            closest_tx_red = x + w + 100 + int(abs(gyro)*0.15)
+            closest_ty_red = y
 ```
-根據條件增加額外偏轉角度
+
+### 陀螺儀補償
+
+由於攝影機鏡頭存在一定的畸變（廣角或桶狀變形），車輛在旋轉時，物體的投影位置會產生偏移，導致直接從影像計算的避障角度不準確。
+為修正此誤差，將車輛的實際旋轉角度（由陀螺儀讀取）乘以一個比例係數，動態調整積木的 x 座標位置，達到補償效果。
 ```
-if norm_y > 0.5 and norm_x < 0.8 and abs(gyro) > 30:
-    extra_angle = 25
-elif norm_y > 0.5 and norm_x < 0.8:
-    extra_angle = 10
+closest_tx_red = x + w + 100 + int(abs(gyro)*0.15)
+```
+
+### 避障路徑計算
+
+避障的基礎邏輯是根據車頭位置 (cx, cy) 與目標物位置 (bx, by) 計算斜率 m = dy / dx，再透過映射函數（mapping）將斜率轉換為伺服馬達的轉向角度。
+此步驟處理「正常閃避路徑」，在沒有撞牆風險時直接執行。
+```
+dx = abs(bx - cx)
+dy = abs(by - cy)
+m = dy/dx
+m = constrain(m, 0, 3)
+servo_angle = mapping(m, 0, 3, 50, 10) 
+servo.angle(servo_angle)
+```
+
+### 牆體碰撞檢測與路徑修正
+
+為避免閃避過程中撞到牆，畫面會預先繪製一條斜線代表車身預計經過的避障路徑，並透過 ```cv2.clipLine``` 判斷此路徑是否與牆的矩形邊界相交。
+若相交，計算交點最大 x 座標與牆右邊界的距離差 diff，並依車頭與積木相對位置（象限）調整原始 dx_raw，再重新計算修正後的斜率與伺服角度。
+判斷斜線與矩形是否重疊，並輸出斜線經過矩形的兩點
+```
+intersects, clipped_pt1, clipped_pt2 = cv2.clipLine(rect_red, (315, cy), (bx+75, by))
+```
+計算x位置校正後斜率及依照象限調整伺服馬達角度
+```
+x_man_overlap = max(clipped_pt1[0], clipped_pt2[0])
+rect_right_x = rect_red[0]
+diff = x_man_overlap - rect_right_x
+if dx_raw > 0:
+    dx_adjusted = dx_raw - diff - 22  # 第一象限處理
 else:
-    extra_angle = 0
-```
-最終角度計算與限制
-```
-total_angle = (52 * (offset_ratio + 0.8) / 1.6) + extra_angle
-final_angle = constrain(total_angle, 0, 50)
+    dx_adjusted = dx_raw + diff - 22  # 第二象限處理
+if abs(dx_adjusted) < 1e-5:
+    dx_adjusted = 1e-5 if dx_adjusted >= 0 else -1e-5
+m = dy / dx_adjusted
+m_abs = abs(m)
+m_abs = constrain(m_abs, 0, 3)
+if dx_adjusted > 0:
+    servo_angle = mapping(m_abs, 0, 3, 50, 0)
+    servo.angle(servo_angle) # 往右
+else:
+    servo_angle = mapping(m_abs, 0, 3, 30, 15)
+    servo.angle(-servo_angle) # 往左
 ```
 
 # 團隊營運
