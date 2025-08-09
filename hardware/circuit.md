@@ -1,4 +1,17 @@
-Circuit Instruction
+## 電路板模組示意
+<div align="center"> <img src="../img/circuit_board_Schematic_diagram.png" alt="Hardware Module Board" width="500" /> </div>
+如上圖所示，此電路板搭載多項功能模組：
+
+- Raspberry Pi Input：與 Raspberry Pi 主控板連接的輸入端口。
+
+- DC Motor Output：直流馬達的電源輸出接口。
+
+- Motor Servo Output：伺服馬達控制信號輸出。
+
+- Color Sensor Input：顏色感測器數據輸入端口。
+
+- 5V Output：穩壓後的 5V 電源輸出，供應系統其他模組。
+## Circuit Instruction
 <div align="center"> <img src="../img/circuit_diagram.png" alt="System Circuit Diagram" width="450" height="300" /> </div>
 本電路圖展示整體系統架構，核心控制單元為 Raspberry Pi 4，搭配多個模組包括直流馬達、伺服馬達、感測器及電源管理模組。以下為各模組詳細說明。
 
