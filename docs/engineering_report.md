@@ -334,6 +334,9 @@ servo.angle(servo_angle)
 為避免閃避過程中撞到牆，畫面會預先繪製一條斜線代表車身預計經過的避障路徑，並透過 ```cv2.clipLine``` 判斷此路徑是否與牆的矩形邊界相交。
 若相交，計算交點最大 x 座標與牆右邊界的距離差 diff，並依車頭與積木相對位置（象限）調整原始 dx_raw，再重新計算修正後的斜率與伺服角度。
 判斷斜線與矩形是否重疊，並輸出斜線經過矩形的兩點
+<div align="center">
+<img width="auto" height="300" src="../img/wall_detect.png">
+</div>
 ```
 intersects, clipped_pt1, clipped_pt2 = cv2.clipLine(rect_red, (315, cy), (bx+75, by))
 ```
