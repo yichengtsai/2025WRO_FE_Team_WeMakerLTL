@@ -283,6 +283,10 @@ else if gyro < 0:
 
 為了辨識場地中的紅色與綠色積木，程式採用了 HSV 色彩空間來進行顏色篩選。與 RGB 不同，HSV 更適合處理顏色辨識的問題，因為它將顏色（Hue）、飽和度（Saturation）與明亮度（Value）分離，能更穩定地適應不同光照條件。
 
+<div align="center">
+<img width="auto" height="300" src="../img/HSV_detect.png">
+</div>
+
 使用 ``` cv2.inRange ``` 函式可以將在範圍內的像素轉為白色（255），不在範圍內的轉為黑色（0），形成二值遮罩。再透過 cv2.findContours 找出輪廓，即可擷取紅綠積木在影像中的位置。這些輪廓後續會用來判斷積木位置與大小，進一步進行避障判斷與行為控制。
 
 根據設定好的色彩範圍，對畫面進行遮罩，找出特定顏色積木的區域
@@ -331,12 +335,14 @@ servo.angle(servo_angle)
 
 ### 牆體碰撞檢測與路徑修正
 
-為避免閃避過程中撞到牆，畫面會預先繪製一條斜線代表車身預計經過的避障路徑，並透過 ```cv2.clipLine``` 判斷此路徑是否與牆的矩形邊界相交。
+為避免閃避過程中撞到牆，畫面會在多繪製一條斜線代表車身預計經過的避障路徑，並透過 ```cv2.clipLine``` 判斷此路徑是否與牆的矩形邊界相交。
 若相交，計算交點最大 x 座標與牆右邊界的距離差 diff，並依車頭與積木相對位置（象限）調整原始 dx_raw，再重新計算修正後的斜率與伺服角度。
-判斷斜線與矩形是否重疊，並輸出斜線經過矩形的兩點
+
 <div align="center">
 <img width="auto" height="300" src="../img/wall_detect.png">
 </div>
+
+判斷斜線與矩形是否重疊，並輸出斜線經過矩形的兩點
 ```
 intersects, clipped_pt1, clipped_pt2 = cv2.clipLine(rect_red, (315, cy), (bx+75, by))
 ```
