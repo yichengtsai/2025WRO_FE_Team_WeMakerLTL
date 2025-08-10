@@ -278,6 +278,10 @@ else if gyro < 0:
 ```
 
 ## 障礙挑戰賽
+<div align="center">
+<img width="auto" height="300" src="../img/Final_Challenge_Flowchart.png">
+</div>
+
 
 ### 顏色遮罩設定與輪廓擷取
 
