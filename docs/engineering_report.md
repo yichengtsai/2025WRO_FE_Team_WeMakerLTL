@@ -285,7 +285,7 @@ else if gyro < 0:
 在避障邏輯中，系統會先根據車頭與目標物位置計算斜率，映射為伺服馬達轉向角度，生成基礎避讓方向；同時，系統會預測此路徑是否可能與牆體相交，若偵測到潛在碰撞，則計算交點位置並動態修正避讓方向，確保車輛在保持安全距離的前提下順利繞過障礙物。
 
 <div align="center">
-<img width="auto" height="300" src="../img/Final_Challenge_Flowchart.png">
+<img width="auto" height="300" src="../img/ObstacleChallenge_Flowchart.png">
 </div>
 
 ### 顏色遮罩設定與輪廓擷取
