@@ -2,7 +2,7 @@
 
 ## 隊伍資訊
 
-<div align="center"><img src="img/WeMaker - LOGO.png" width="200px"></div>
+<div align="center"><img src="img/WeMaker - LOGO.png" width="300px"></div>
 
 - **隊伍名稱**： WeMaker-LTL
 - **隊員**： 蔡宜成、林仲斌、賴孟承
