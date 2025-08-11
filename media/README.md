@@ -55,4 +55,4 @@
 
 * [`Open Challenge Video Link`](https://www.youtube.com/watch?v=9j58IBostGY)
 
-* [`Obstacle Challenge Video Link`](https://www.youtube.com/watch?v=XK0Uejr6utQ)
+* [`Obstacle Challenge Video Link`](https://www.youtube.com/watch?v=Z6zT3QnwcCs&ab_channel=UchihaItachi%E5%AE%87%E6%99%BA%E6%92%A5%E6%9F%9A)
