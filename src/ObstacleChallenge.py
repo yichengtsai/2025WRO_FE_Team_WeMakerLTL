@@ -443,9 +443,7 @@ while total_line_count < 13:
             ty = y
             cv2.rectangle(imageFrame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             y_bottom = y + h  
-            if x > 405 and abs(gyro) < 5:
-                print("no")
-            elif y_bottom > max_y_bottom_green+30:
+            if y_bottom > max_y_bottom_green+30:
                 max_y_bottom_green = y_bottom
                 closest_tx_green = x - 105 - int(abs(gyro)*0.15)
                 closest_ty_green = y
